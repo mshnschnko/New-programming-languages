@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 )
 
 type User struct {
@@ -107,6 +108,22 @@ type Admin struct {
 	Website
 }
 
+type Stringer interface {
+	String() string
+}
+
+func (u *User) String() string {
+	return u.firstName + " " + u.lastName + " " + u.email + " " + strconv.Itoa(u.age)
+}
+
+func (a *Adress) String() string {
+	return a.country + " " + a.city
+}
+
+func print_smth(s Stringer) {
+	fmt.Println(s.String())
+}
+
 // func NewAdmin()
 
 // func (u *Admin) print_me() {
@@ -115,11 +132,16 @@ type Admin struct {
 // }
 
 func main() {
+	adress := NewAdress("Russia", "Saint-P")
 	user := NewUser("A", "exampple@g.com", 20)
-	fmt.Println(user.firstName)
 
-	ad := Admin{true, *user, "articles", Website{"url", 200}}
-	fmt.Println(ad.users_per_month)
+	print_smth(adress)
+	print_smth(user)
+
+	// fmt.Println(user.firstName)
+
+	// ad := Admin{true, *user, "articles", Website{"url", 200}}
+	// fmt.Println(ad.users_per_month)
 
 	// admin := Admin{true, *user, "articles"}
 	// fmt.Printf("Hello! I'm %s %s and I administer the %s section",
