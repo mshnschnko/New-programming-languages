@@ -25,7 +25,7 @@ func run(dirname string) {
 }
 
 func main() {
-	dirname := "matricies"
+	dirname := "matrices"
 	if len(os.Args) > 1 {
 		dirname = os.Args[1]
 	}
