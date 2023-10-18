@@ -39,14 +39,19 @@ func getOccurrences(_ pattern: String, _ text: String) -> [Int] {
 
 
 func main() {
-    let file = "text.txt"
-
-    if let textOrig = try? String(contentsOfFile: file) {
-        let textList = textOrig.split(separator: " ").compactMap { String($0) }
-        let pattern: String = textList[0]
-        let text: String = textList[1]
-        let res = getOccurrences(pattern, text)
-        print(res)
+    // let file = "text.txt"
+    print("Enter pattern and file")
+    if let enter = readLine() {
+        let enterElements = enter.split(separator: " ").compactMap { String($0) }
+        let pattern: String = enterElements[0]
+        let filepath: String = enterElements[1]
+        if let text = try? String(contentsOfFile: filepath) {
+            // let textList = textOrig.split(separator: " ").compactMap { String($0) }
+            // let pattern: String = textList[0]
+            // let text: String = textOrig //textList[1]
+            let res = getOccurrences(pattern, text)
+            print(res)
+        }
     }
     else {
         print("File reading error")
