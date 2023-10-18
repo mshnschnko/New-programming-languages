@@ -18,7 +18,7 @@ func run(dirname string) {
 		go func(filepath string) {
 			defer wg.Done()
 			matrix := ReadMatrixFromFile(filepath)
-			fmt.Println(det(matrix))
+			fmt.Println("Determinant of matrix in ", filepath, " = ", det(matrix))
 		}(dirname + "/" + f.Name())
 	}
 	wg.Wait()
