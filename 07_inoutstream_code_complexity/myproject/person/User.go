@@ -13,12 +13,12 @@ type User struct {
 
 func NewUser(
 	firstName string, lastName string,
-	age int, address address.Address,
+	age int, address *address.Address,
 	email string, password string) (*User, error) {
 	if age < 0 {
 		return nil, &myerrors.AgeError{Message: "Возраст не может быть отрицательным"}
 	}
-	return &User{Person: Person{FirstName: firstName, LastName: lastName, age: age, Address: address}, Email: email, password: password}, nil
+	return &User{Person: Person{FirstName: firstName, LastName: lastName, age: age, Address: *address}, Email: email, password: password}, nil
 }
 
 func (u *User) ChangePassword(oldPassword string, newPassword string) error {
@@ -32,9 +32,9 @@ func (u *User) ChangePassword(oldPassword string, newPassword string) error {
 	return nil
 }
 
-func (u *User) Login(email string, password string) error {
+func (u *User) Login(email string, password string) (bool, error) {
 	if email == u.Email && password == u.password {
-		return nil
+		return true, nil
 	}
-	return &myerrors.InvalidLoginDataError{Message: "Неверный email или пароль"}
+	return false, &myerrors.InvalidLoginDataError{Message: "Неверный email или пароль"}
 }
