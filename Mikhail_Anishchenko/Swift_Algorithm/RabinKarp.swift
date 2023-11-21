@@ -12,7 +12,7 @@ func hash(_ str: String, _ x: Int, _ p: Int) -> Int {
 
 func getOccurrences(_ pattern: String, _ text: String) -> [Int] {
     let p = 1000000007
-    let x = 263
+    let x = 181
     var result = [Int]()
     let x_pm1 = Int(pow(Double(x),Double(pattern.count - 1)))
     let hp = hash(pattern, x, p)
